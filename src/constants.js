@@ -1,0 +1,1 @@
+export const DEFAULT_LISTING_IMAGE = "/property_image.jpeg";
