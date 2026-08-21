@@ -50,6 +50,39 @@ export default function CreateListing() {
     longitude,
     images,
   } = formData;
+
+  function renderGeolocationToggle() {
+    return (
+      <div className="mb-6">
+        <p className="text-lg font-semibold">Location</p>
+        <div className="flex">
+          <button
+            type="button"
+            onClick={() => setGeolocationEnabled(true)}
+            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
+              geolocationEnabled
+                ? "bg-slate-600 text-white"
+                : "bg-white text-black"
+            }`}
+          >
+            Use address
+          </button>
+          <button
+            type="button"
+            onClick={() => setGeolocationEnabled(false)}
+            className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
+              !geolocationEnabled
+                ? "bg-slate-600 text-white"
+                : "bg-white text-black"
+            }`}
+          >
+            Coordinates
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   function onChange(e) {
     let boolean = null;
     if (e.target.value === "true") {
@@ -129,6 +162,9 @@ export default function CreateListing() {
                 break;
               case "running":
                 console.log("Upload is running");
+                break;
+              default:
+                console.log("Upload state is in progress");
                 break;
             }
           },
@@ -298,6 +334,7 @@ export default function CreateListing() {
             no
           </button>
         </div>
+        {renderGeolocationToggle()}
         <p className="text-lg mt-6 font-semibold">Address</p>
         <textarea
           type="text"
